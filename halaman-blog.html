@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kegiatan & Artikel - TK Baitul Uyun</title>
+    
+    <!-- Impor Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Impor Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Konfigurasi kustom untuk Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Aktifkan mode gelap berbasis class
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Fredoka One', 'cursive'],
+                        'sans': ['Mada', 'sans-serif'],
+                    },
+                    colors: {
+                        // Palet Warna Mode Terang
+                        'brand-green': '#2D767F', 
+                        'brand-gold': '#F5C962', 
+                        'brand-cream': '#FEFBF6',
+                        'brand-teal': '#1A4341', 
+                        'brand-light': '#F7FDFD',
+                        'brand-pink': '#F7A7A6',
+                        // Palet Warna Mode Gelap
+                        'dark-bg': '#121212',
+                        'dark-surface': '#1E1E1E',
+                        'dark-text': '#E0E0E0',
+                        'dark-primary': '#76D7C4',
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(30px) scale(0.98)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Impor Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mada:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Pola latar belakang SVG yang lebih halus */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .light-mode-bg {
+            background-color: #F7FDFD;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%232D767F' fill-opacity='0.04'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .dark .dark-mode-bg {
+            background-color: #121212;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2376D7C4' fill-opacity='0.05'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Style untuk Tombol Dark Mode */
+        #theme-toggle {
+            background-color: #eee;
+            border-radius: 9999px;
+            padding: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .dark #theme-toggle {
+            background-color: #444;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        #theme-toggle-icon {
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+        /* Efek hover untuk card */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(118, 215, 196, 0.1), 0 4px 6px -4px rgba(118, 215, 196, 0.1);
+        }
+        /* Style untuk dropdown */
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        /* Style untuk Modal */
+        #blog-modal {
+            transition: opacity 0.3s ease;
+        }
+        #blog-modal-content {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="light-mode-bg dark:dark-mode-bg font-sans text-brand-teal dark:text-dark-text">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="bg-white/80 dark:bg-dark-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-3xl font-display text-brand-green dark:text-dark-primary flex items-center">
+                    <i class="fas fa-moon text-brand-gold dark:text-yellow-400 mr-3"></i>
+                    TK Baitul Uyun
+                </a>
+                <div class="hidden md:flex space-x-6 items-center font-semibold" id="desktop-nav">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Beranda</a>
+                    
+                    <div class="relative dropdown-container pt-4 pb-4 -mt-4 -mb-4">
+                        <button class="dropdown-button flex items-center text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">
+                            Tentang
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden mt-2 w-48 bg-white dark:bg-dark-surface rounded-lg shadow-xl py-2 z-20 opacity-0 transform -translate-y-2">
+                            <a href="halaman-profil.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                            <a href="halaman-sambutan.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                            <a href="visi-misi.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                            <a href="halaman-fasilitas.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                            <a href="halaman-guru.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                        </div>
+                    </div>
+
+                    <a href="halaman-program.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Program</a>
+                    <a href="halaman-prestasi.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Prestasi</a>
+                    <a href="halaman-blog.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Blog</a>
+                    <a href="halaman-pendaftaran.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Pendaftaran</a>
+                    <a href="halaman-galeri.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Galeri</a>
+                    <a href="index.html#kontak" class="bg-brand-gold text-brand-teal px-5 py-2 rounded-full hover:bg-yellow-400 dark:bg-dark-primary dark:text-dark-bg dark:hover:bg-teal-300 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:-translate-y-0.5">Hubungi Kami</a>
+                    <button id="theme-toggle" class="w-14 h-8 flex items-center">
+                        <span id="theme-toggle-icon" class="bg-white dark:bg-gray-700 text-yellow-500 dark:text-yellow-300 w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+                            <i class="fas fa-sun"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                     <button id="theme-toggle-mobile" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-sun text-2xl"></i>
+                    </button>
+                    <button id="menu-btn" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 bg-white dark:bg-dark-surface rounded-lg shadow-xl">
+                <a href="index.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700 rounded-t-lg">Beranda</a>
+                
+                <div>
+                    <button class="mobile-dropdown-toggle w-full flex justify-between items-center py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">
+                        <span>Tentang</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="mobile-submenu hidden pl-4 bg-gray-50 dark:bg-gray-800">
+                        <a href="halaman-profil.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                        <a href="halaman-sambutan.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                        <a href="visi-misi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                        <a href="halaman-fasilitas.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                        <a href="halaman-guru.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                    </div>
+                </div>
+
+                <a href="halaman-program.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Program</a>
+                <a href="halaman-prestasi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Prestasi</a>
+                <a href="halaman-blog.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Blog</a>
+                <a href="halaman-pendaftaran.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Pendaftaran</a>
+                <a href="halaman-galeri.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Galeri</a>
+                <a href="index.html#kontak" class="mobile-link block py-3 px-4 text-sm bg-brand-gold text-brand-teal dark:bg-dark-primary dark:text-dark-bg rounded-b-lg mt-2 text-center font-semibold">Hubungi Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section Halaman Prestasi -->
+        <section class="bg-brand-gold dark:bg-yellow-600 py-20">
+            <div class="container mx-auto px-6 text-center animate-fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-display text-brand-teal dark:text-white">Blog & Kegiatan</h1>
+                <p class="mt-4 text-lg text-brand-teal dark:text-gray-200 max-w-3xl mx-auto">Temukan wawasan, kegiatan, dan cerita inspiratif seputar dunia pendidikan anak usia dini dalam perspektif Islami.</p>
+            </div>
+        </section>
+
+        <!-- Konten Blog -->
+        <section class="py-24 bg-brand-light dark:bg-dark-bg">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Kartu Blog 1 -->
+                    <div class="blog-card bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover animate-fade-in-up cursor-pointer" style="animation-delay: 200ms;"
+                         data-image="gambar/gambar (6).jpeg"
+                         data-category="Kegiatan "
+                         data-date="2 Agustus 2025"
+                         data-title="Kegiatan Pentas Seni"
+                         data-content="Pentas Seni merupakan salah satu kegiatan tahunan yang sangat istimewa di TK Baitul Uyun. Kegiatan ini menjadi momen yang dinanti-nantikan oleh anak-anak, guru, maupun orang tua. Melalui kegiatan ini, TK Baitul Uyun memberikan ruang bagi siswa-siswinya untuk berekspresi, mengembangkan kreativitas, serta menunjukkan hasil belajar dan bakat yang telah diasah selama proses pembelajaran berlangsung.
+
+Pentas seni tidak hanya menjadi ajang hiburan, tetapi juga sarana edukatif yang berperan penting dalam pengembangan karakter dan kepercayaan diri anak sejak usia dini. Dalam suasana yang meriah dan penuh keceriaan, anak-anak tampil dengan percaya diri di atas panggung, disaksikan oleh para orang tua, guru, dan tamu undangan.
+
+Adapun beberapa penampilan yang ditampilkan dalam pentas seni antara lain:
+
+1. Tarian tradisional – anak-anak menampilkan berbagai tarian daerah yang indah dan energik sebagai bentuk pelestarian budaya sejak dini.
+
+2. Drama musikal – menampilkan cerita-cerita sederhana namun sarat pesan moral, dibawakan oleh anak-anak dengan penuh ekspresi dan semangat.
+
+3. Paduan suara – melatih kekompakan dan keberanian anak-anak untuk menyanyi bersama dalam harmoni yang ceria.
+
+4. Puisi dan pantun – anak-anak menyampaikan karya sastra sederhana sebagai bentuk latihan berbicara di depan umum dan mengekspresikan perasaan.
+
+5. Fashion show tema profesi – mengenalkan berbagai profesi sambil menumbuhkan impian dan semangat anak-anak terhadap masa depan.
+
+Persiapan dilakukan jauh-jauh hari dengan latihan yang menyenangkan dan penuh semangat. Guru-guru membimbing anak-anak dengan sabar, membantu mereka tampil dengan percaya diri tanpa tekanan. Pentas seni menjadi ajang untuk mengasah kemampuan komunikasi, kerja sama, disiplin, dan tanggung jawab dalam suasana yang menggembirakan.
+
+Orang tua juga terlibat secara aktif, mulai dari menyiapkan kostum, mendampingi saat latihan, hingga memberikan semangat dan tepuk tangan saat anak-anak tampil. Kehadiran orang tua menjadi dukungan moral yang luar biasa bagi anak-anak dan mempererat hubungan antara keluarga dan sekolah.
+
+Melalui kegiatan Pentas Seni ini, TK Baitul Uyun berharap dapat terus memupuk keberanian, keceriaan, dan potensi luar biasa yang dimiliki oleh setiap anak. Karena kami percaya, setiap anak adalah pribadi istimewa yang layak diberi ruang untuk tumbuh, berekspresi, dan bersinar.">
+                        <img src="gambar/gambar (6).jpeg" alt="Parenting" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-brand-gold text-brand-teal text-xs font-bold px-3 py-1 rounded-full">Kegiatan</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">2 Agustus 2025</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Pentas Seni</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-6">Pentas Seni merupakan salah satu kegiatan tahunan yang sangat istimewa di TK Baitul Uyun. Kegiatan ini menjadi momen yang dinanti-nantikan oleh anak-anak, guru, maupun orang tua....</p>
+                            <span class="font-semibold text-brand-green dark:text-dark-primary hover:underline">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Blog 2 -->
+                    <div class="blog-card bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover animate-fade-in-up cursor-pointer" style="animation-delay: 300ms;"
+                         data-image="gambar/gambar (3).jpeg"
+                         data-category="Kegiatan"
+                         data-date="28 Juli 2025"
+                         data-title="Mengikuti Perlombaan Antar Kota"
+                         data-content="TK Baitul Uyun senantiasa mendorong tumbuhnya potensi dan bakat anak-anak sejak usia dini melalui berbagai kegiatan, salah satunya dengan mengikuti perlombaan antar kota se-DKI Jakarta. Kegiatan ini menjadi ajang yang tidak hanya menumbuhkan rasa percaya diri anak-anak, tetapi juga membentuk mental yang kuat, sportif, dan penuh semangat.
+
+Perlombaan yang diikuti oleh TK Baitul Uyun melibatkan berbagai kategori lomba yang dirancang sesuai dengan perkembangan usia anak-anak. Dalam kegiatan ini, siswa-siswi kami tampil sebagai perwakilan sekolah dengan semangat tinggi dan antusiasme yang luar biasa. Mereka telah menjalani berbagai persiapan yang matang, dibimbing langsung oleh para guru yang berdedikasi dan penuh perhatian.
+
+Adapun jenis lomba yang diikuti oleh anak-anak antara lain:
+
+1. Lomba mewarnai – mengasah kreativitas, koordinasi mata dan tangan, serta imajinasi anak melalui pewarnaan gambar dengan teknik dan komposisi warna yang indah.
+
+2. Lomba menyanyi solo – memberikan ruang bagi anak untuk mengekspresikan diri, melatih keberanian tampil di depan umum, serta meningkatkan kepercayaan diri.
+
+3. Lomba fashion show busana daerah – mengenalkan budaya Indonesia sejak dini, sekaligus melatih keluwesan dan keanggunan anak-anak di atas panggung.
+
+4. Lomba senam kreasi – melatih kekompakan, motorik kasar, dan kebugaran fisik anak-anak melalui gerakan-gerakan senam yang energik dan menyenangkan.
+
+5. Lomba bercerita (story telling) – membangun kemampuan berbahasa, daya ingat, serta kemampuan anak dalam menyampaikan pesan secara lisan dengan penuh ekspresi.
+
+Setiap anak yang mengikuti perlombaan mendapatkan pembekalan yang menyenangkan namun disiplin. Para guru tidak hanya fokus pada teknik lomba, tetapi juga menanamkan sikap rendah hati, kerja keras, dan semangat pantang menyerah. Anak-anak diajarkan bahwa yang terpenting bukan hanya menang, tetapi juga keberanian untuk mencoba dan semangat dalam berproses.
+
+Kegiatan perlombaan ini juga mempererat hubungan antara sekolah, orang tua, dan anak. Para orang tua sangat mendukung dengan hadir langsung memberi semangat, mendampingi, serta merayakan setiap usaha dan capaian anak-anak mereka.
+
+Hasil dari perlombaan ini sangat membanggakan. Beberapa anak berhasil meraih prestasi yang mengharumkan nama sekolah, namun yang lebih utama adalah tumbuhnya rasa percaya diri, solidaritas, serta semangat untuk terus belajar dan berkembang.
+
+Melalui kegiatan seperti ini, TK Baitul Uyun berkomitmen untuk terus mengembangkan potensi anak secara holistik—baik secara akademik, karakter, maupun keterampilan sosial. Karena setiap anak adalah bintang, dan kami hadir untuk membantu mereka bersinar.">
+                        <img src="gambar/gambar (3).jpeg" alt="Pendidikan" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-brand-pink text-white text-xs font-bold px-3 py-1 rounded-full">Kegiatan</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">28 Juli 2025</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Perlombaan Antar Kota</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-6">TK Baitul Uyun senantiasa mendorong tumbuhnya potensi dan bakat anak-anak sejak usia dini melalui berbagai kegiatan...</p>
+                            <span class="font-semibold text-brand-green dark:text-dark-primary hover:underline">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Blog 3 -->
+                    <div class="blog-card bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover animate-fade-in-up cursor-pointer" style="animation-delay: 400ms;"
+                         data-image="gambar/gambar 12.png"
+                         data-category="Kegiatan"
+                         data-date="14 Novenber 2024"
+                         data-title="Manasik Haji"
+                         data-content="Salah satu kegiatan tahunan yang penuh makna dan edukatif di TK Baitul Uyun adalah Manasik Haji. Kegiatan ini bertujuan untuk mengenalkan anak-anak pada rukun Islam kelima, yaitu ibadah haji, dengan cara yang menyenangkan dan mudah dipahami sesuai usia mereka. Melalui simulasi ini, anak-anak tidak hanya diajak memahami tata cara berhaji, tetapi juga nilai-nilai luhur seperti kesabaran, ketaatan, kedisiplinan, dan kebersamaan.
+
+Manasik haji dilaksanakan secara terstruktur dan dikemas seperti layaknya pelaksanaan haji yang sebenarnya. Anak-anak didampingi oleh guru-guru yang berperan sebagai pembimbing, menggunakan bahasa sederhana dan penuh kelembutan agar pesan-pesan spiritual dapat tersampaikan dengan baik.
+
+Adapun rangkaian kegiatan manasik haji yang dilakukan meliputi:
+
+1. Niat dan memakai pakaian ihram – anak-anak dikenalkan pada niat haji dan mengenakan pakaian serba putih sebagai simbol kesucian dan kesederhanaan.
+
+2. Wukuf di Arafah – anak-anak duduk tenang sambil membaca doa bersama sebagai simbol merenung dan memohon ampun.
+
+3. Mabit di Muzdalifah – anak-anak diajak berpindah tempat sambil memungut batu kerikil mainan sebagai simbol kesungguhan dan persiapan diri.
+
+4. Melempar jumrah – anak-anak melemparkan kerikil ke arah replika tiang jumrah sambil membaca takbir, melambangkan perlawanan terhadap godaan.
+
+5. Thawaf mengelilingi Ka’bah – anak-anak berjalan mengelilingi Ka’bah mini sebanyak tujuh kali sambil membaca dzikir dan takbir ringan.
+
+6. Sa’i antara Shafa dan Marwah – anak-anak berjalan berulang kali pada jalur yang disiapkan, mengenang perjuangan Siti Hajar dalam mencari air.
+
+7. Tahallul – anak-anak melakukan simbol mencukur atau memotong sebagian kecil rambut sebagai tanda telah menyelesaikan rangkaian ibadah.
+
+Selama kegiatan berlangsung, anak-anak tampak antusias, tertib, dan bahagia. Guru-guru memberikan pendampingan penuh dan menjelaskan makna setiap tahapan ibadah dengan cara yang interaktif dan menyenangkan. Selain itu, para orang tua juga turut serta hadir sebagai pendukung kegiatan, menjadikan suasana semakin akrab dan meriah.
+
+Melalui kegiatan ini, TK Baitul Uyun tidak hanya memberikan pengalaman spiritual pertama yang berkesan, tetapi juga membentuk karakter anak-anak agar tumbuh menjadi pribadi yang taat, santun, dan penuh rasa tanggung jawab. Manasik haji menjadi bukti nyata bahwa pendidikan agama dapat dikenalkan dengan cara yang lembut namun bermakna sejak usia dini.">
+                        <img src="gambar/gambar 12.png" alt="Kesehatan" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                             <div class="flex justify-between items-center mb-4">
+                                <span class="bg-dark-primary text-dark-bg text-xs font-bold px-3 py-1 rounded-full">Kegiatan</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">14 Novenber 2025</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Manasik Haji</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-6">Salah satu kegiatan tahunan yang sangat dinanti-nantikan oleh anak-anak TK Baitul Uyun adalah kegiatan Manasik Haji....</p>
+                            <span class="font-semibold text-brand-green dark:text-dark-primary hover:underline">Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="blog-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div id="blog-modal-content" class="bg-white dark:bg-dark-surface rounded-2xl shadow-2xl w-full max-w-3xl mx-auto transform scale-95 max-h-[90vh] overflow-y-auto">
+            <div class="relative">
+                <button id="close-modal" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 w-8 h-8 rounded-full hover:bg-opacity-75 transition z-10">&times;</button>
+                <img id="modal-image" src="" alt="Detail Artikel" class="w-full h-64 object-cover rounded-t-2xl">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <span id="modal-category" class="bg-brand-gold text-brand-teal text-xs font-bold px-3 py-1 rounded-full"></span>
+                        <span id="modal-date" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                    </div>
+                    <h2 id="modal-title" class="text-3xl font-bold font-display text-brand-green dark:text-dark-primary mb-4"></h2>
+                    <div id="modal-content" class="text-gray-600 dark:text-gray-300 leading-relaxed space-y-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-brand-teal text-white pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">TK Baitul Uyun</h3>
+                    <p class="text-gray-300">Membentuk generasi penerus yang cerdas, kreatif, dan berakhlak mulia sejak usia dini.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Hubungi Kami</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt w-5 mt-1 text-brand-gold dark:text-dark-primary"></i><span>Jl. Kapuk Budi Karya No.70, RT.18/RW.12, Kapuk, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11720</span></li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt w-5 text-brand-gold dark:text-dark-primary"></i><span>082110921234</span></li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-5 text-brand-gold dark:text-dark-primary"></i><span>info@tkbaituluyun.sch.id</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Lokasi Sekolah</h3>
+                     <div class="rounded-lg overflow-hidden shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.8236180946087!2d106.7473721373776!3d-6.136562099544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f7df8efe0da9%3A0xb9a9bc04a2d4a35d!2sTK%20BAITUL%20UYUN!5e0!3m2!1sid!2sid!4v1754151648148!5m2!1sid!2sid" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 TK Baitul Uyun. Dibuat oleh Musadeto.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script untuk Dark/Light Mode
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const mobileIcon = document.querySelector('#theme-toggle-mobile i');
+        const html = document.documentElement;
+
+        const setDark = () => {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-moon"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-moon text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(24px)';
+        };
+
+        const setLight = () => {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-sun"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-sun text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(0px)';
+        };
+
+        const toggleTheme = () => {
+            if (html.classList.contains('dark')) {
+                setLight();
+            } else {
+                setDark();
+            }
+        };
+
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Cek tema saat halaman dimuat
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setDark();
+        } else {
+            setLight();
+        }
+
+        // Script untuk toggle menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Script untuk dropdown navigasi
+        document.querySelectorAll('.dropdown-container').forEach(container => {
+            const menu = container.querySelector('.dropdown-menu');
+            container.addEventListener('mouseenter', () => {
+                menu.classList.remove('hidden', 'opacity-0', '-translate-y-2');
+            });
+            container.addEventListener('mouseleave', () => {
+                menu.classList.add('hidden', 'opacity-0', '-translate-y-2');
+            });
+        });
+
+        // Script untuk dropdown navigasi mobile
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const submenu = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                submenu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Tutup menu mobile setelah link diklik
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileMenu) mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Script untuk Modal Blog
+        const blogCards = document.querySelectorAll('.blog-card');
+        const modal = document.getElementById('blog-modal');
+        const modalContent = document.getElementById('blog-modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+        
+        blogCards.forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('modal-image').src = card.dataset.image;
+                document.getElementById('modal-category').textContent = card.dataset.category;
+                document.getElementById('modal-date').textContent = card.dataset.date;
+                document.getElementById('modal-title').textContent = card.dataset.title;
+                document.getElementById('modal-content').innerHTML = `<p>${card.dataset.content.split('\n').join('</p><p>')}</p>`;
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                }, 10);
+            });
+        });
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

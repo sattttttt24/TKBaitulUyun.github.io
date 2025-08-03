@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fasilitas Sekolah - TK Baitul Uyun</title>
+    
+    <!-- Impor Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Impor Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Konfigurasi kustom untuk Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Aktifkan mode gelap berbasis class
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Fredoka One', 'cursive'],
+                        'sans': ['Mada', 'sans-serif'],
+                    },
+                    colors: {
+                        // Palet Warna Mode Terang
+                        'brand-green': '#2D767F', 
+                        'brand-gold': '#F5C962', 
+                        'brand-cream': '#FEFBF6',
+                        'brand-teal': '#1A4341', 
+                        'brand-light': '#F7FDFD',
+                        'brand-pink': '#F7A7A6',
+                        // Palet Warna Mode Gelap
+                        'dark-bg': '#121212',
+                        'dark-surface': '#1E1E1E',
+                        'dark-text': '#E0E0E0',
+                        'dark-primary': '#76D7C4',
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(30px) scale(0.98)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Impor Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mada:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Mengatur smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Pola latar belakang SVG yang lebih halus */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .light-mode-bg {
+            background-color: #F7FDFD;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%232D767F' fill-opacity='0.04'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .dark .dark-mode-bg {
+            background-color: #121212;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2376D7C4' fill-opacity='0.05'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Style untuk Tombol Dark Mode */
+        #theme-toggle {
+            background-color: #eee;
+            border-radius: 9999px;
+            padding: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .dark #theme-toggle {
+            background-color: #444;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        #theme-toggle-icon {
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+        /* Efek hover untuk card */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(118, 215, 196, 0.1), 0 4px 6px -4px rgba(118, 215, 196, 0.1);
+        }
+        /* Style untuk dropdown */
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="light-mode-bg dark:dark-mode-bg font-sans text-brand-teal dark:text-dark-text">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="bg-white/80 dark:bg-dark-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-3xl font-display text-brand-green dark:text-dark-primary flex items-center">
+                    <i class="fas fa-moon text-brand-gold dark:text-yellow-400 mr-3"></i>
+                    TK Baitul Uyun
+                </a>
+                <div class="hidden md:flex space-x-6 items-center font-semibold" id="desktop-nav">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Beranda</a>
+                    
+                    <div class="relative dropdown-container pt-4 pb-4 -mt-4 -mb-4">
+                        <button class="dropdown-button flex items-center text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">
+                            Tentang
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden mt-2 w-48 bg-white dark:bg-dark-surface rounded-lg shadow-xl py-2 z-20 opacity-0 transform -translate-y-2">
+                            <a href="halaman-profil.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                            <a href="halaman-sambutan.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                            <a href="visi-misi.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                            <a href="halaman-fasilitas.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                            <a href="halaman-guru.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                        </div>
+                    </div>
+
+                    <a href="halaman-program.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Program</a>
+                    <a href="halaman-prestasi.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Prestasi</a>
+                    <a href="halaman-blog.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Blog</a>
+                    <a href="halaman-pendaftaran.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Pendaftaran</a>
+                    <a href="halaman-galeri.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Galeri</a>
+                    <a href="index.html#kontak" class="bg-brand-gold text-brand-teal px-5 py-2 rounded-full hover:bg-yellow-400 dark:bg-dark-primary dark:text-dark-bg dark:hover:bg-teal-300 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:-translate-y-0.5">Hubungi Kami</a>
+                    <button id="theme-toggle" class="w-14 h-8 flex items-center">
+                        <span id="theme-toggle-icon" class="bg-white dark:bg-gray-700 text-yellow-500 dark:text-yellow-300 w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+                            <i class="fas fa-sun"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                     <button id="theme-toggle-mobile" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-sun text-2xl"></i>
+                    </button>
+                    <button id="menu-btn" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 bg-white dark:bg-dark-surface rounded-lg shadow-xl">
+                <a href="index.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700 rounded-t-lg">Beranda</a>
+                
+                <div>
+                    <button class="mobile-dropdown-toggle w-full flex justify-between items-center py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">
+                        <span>Tentang</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="mobile-submenu hidden pl-4 bg-gray-50 dark:bg-gray-800">
+                        <a href="halaman-profil.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                        <a href="halaman-sambutan.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                        <a href="visi-misi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                        <a href="halaman-fasilitas.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                        <a href="halaman-guru.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                    </div>
+                </div>
+
+                <a href="halaman-program.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Program</a>
+                <a href="halaman-prestasi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Prestasi</a>
+                <a href="halaman-blog.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Blog</a>
+                <a href="halaman-pendaftaran.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Pendaftaran</a>
+                <a href="halaman-galeri.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Galeri</a>
+                <a href="index.html#kontak" class="mobile-link block py-3 px-4 text-sm bg-brand-gold text-brand-teal dark:bg-dark-primary dark:text-dark-bg rounded-b-lg mt-2 text-center font-semibold">Hubungi Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section Halaman Prestasi -->
+        <section class="bg-brand-gold dark:bg-yellow-600 py-20">
+            <div class="container mx-auto px-6 text-center animate-fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-display text-brand-teal dark:text-white">Fasilitas Sekolah</h1>
+                <p class="mt-4 text-lg text-brand-teal dark:text-gray-200 max-w-3xl mx-auto">Kami menyediakan lingkungan belajar yang aman, nyaman, dan merangsang kreativitas untuk mendukung tumbuh kembang optimal setiap anak.</p>
+            </div>
+        </section>
+
+        <!-- Konten Fasilitas -->
+        <section class="py-24 bg-brand-light dark:bg-dark-bg">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Kartu Fasilitas 1 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/F7A7A6/1A4341?text=Ruang+Kelas" alt="Ruang Kelas Ceria" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Ruang Kelas Ceria</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Ruang kelas didesain dengan warna-warni cerah dan perabotan yang aman untuk menciptakan suasana belajar yang menyenangkan.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Fasilitas 2 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 300ms;">
+                        <img src="https://placehold.co/600x400/F5C962/1A4341?text=Perpustakaan" alt="Perpustakaan Mini" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Perpustakaan Mini</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Koleksi buku cerita bergambar dan buku pengetahuan anak untuk menumbuhkan minat baca sejak dini.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Fasilitas 3 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 400ms;">
+                        <img src="https://placehold.co/600x400/2D767F/FEFBF6?text=Area+Bermain" alt="Area Bermain Outdoor" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Area Bermain Outdoor</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Dilengkapi dengan permainan yang aman dan bervariasi untuk melatih motorik kasar dan kemampuan sosialisasi anak.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Fasilitas 4 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 500ms;">
+                        <img src="https://placehold.co/600x400/76D7C4/1A4341?text=Musholla" alt="Musholla Bersih" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Musholla Bersih</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Tempat yang nyaman untuk membiasakan anak-anak melaksanakan sholat Dhuha dan praktik ibadah lainnya.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Fasilitas 5 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 600ms;">
+                        <img src="https://placehold.co/600x400/e74c3c/ffffff?text=Ruang+Makan" alt="Ruang Makan Sehat" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Ruang Makan Sehat</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Area makan yang bersih dan higienis untuk mengajarkan adab makan bersama dan pentingnya asupan gizi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Fasilitas 6 -->
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg card-hover animate-fade-in-up" style="animation-delay: 700ms;">
+                        <img src="https://placehold.co/600x400/9b59b6/ffffff?text=Pojok+Seni" alt="Pojok Seni & Kreativitas" class="w-full h-56 object-cover">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Pojok Seni & Kreativitas</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Dilengkapi berbagai media untuk menggambar, mewarnai, dan berkreasi untuk menyalurkan imajinasi anak.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-brand-teal text-white pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">TK Baitul Uyun</h3>
+                    <p class="text-gray-300">Membentuk generasi penerus yang cerdas, kreatif, dan berakhlak mulia sejak usia dini.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Hubungi Kami</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt w-5 mt-1 text-brand-gold dark:text-dark-primary"></i><span>Jl. Kapuk Budi Karya No.70, RT.18/RW.12, Kapuk, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11720</span></li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt w-5 text-brand-gold dark:text-dark-primary"></i><span>082110921234</span></li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-5 text-brand-gold dark:text-dark-primary"></i><span>info@tkbaituluyun.sch.id</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Lokasi Sekolah</h3>
+                     <div class="rounded-lg overflow-hidden shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.8236180946087!2d106.7473721373776!3d-6.136562099544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f7df8efe0da9%3A0xb9a9bc04a2d4a35d!2sTK%20BAITUL%20UYUN!5e0!3m2!1sid!2sid!4v1754151648148!5m2!1sid!2sid" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 TK Baitul Uyun. Dibuat dengan <i class="fas fa-heart text-brand-pink"></i> untuk masa depan cerah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script untuk Dark/Light Mode
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const mobileIcon = document.querySelector('#theme-toggle-mobile i');
+        const html = document.documentElement;
+
+        const setDark = () => {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-moon"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-moon text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(24px)';
+        };
+
+        const setLight = () => {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-sun"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-sun text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(0px)';
+        };
+
+        const toggleTheme = () => {
+            if (html.classList.contains('dark')) {
+                setLight();
+            } else {
+                setDark();
+            }
+        };
+
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Cek tema saat halaman dimuat
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setDark();
+        } else {
+            setLight();
+        }
+
+        // Script untuk toggle menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Script untuk dropdown navigasi
+        document.querySelectorAll('.dropdown-container').forEach(container => {
+            const menu = container.querySelector('.dropdown-menu');
+            container.addEventListener('mouseenter', () => {
+                menu.classList.remove('hidden', 'opacity-0', '-translate-y-2');
+            });
+            container.addEventListener('mouseleave', () => {
+                menu.classList.add('hidden', 'opacity-0', '-translate-y-2');
+            });
+        });
+
+        // Script untuk dropdown navigasi mobile
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const submenu = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                submenu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Tutup menu mobile setelah link diklik
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileMenu) mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK Baitul Uyun - Tumbuh Cerdas dan Berakhlak Mulia</title>
+    
+    <!-- Impor Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Impor Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Konfigurasi kustom untuk Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Aktifkan mode gelap berbasis class
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Fredoka One', 'cursive'],
+                        'sans': ['Mada', 'sans-serif'],
+                    },
+                    colors: {
+                        // Palet Warna Mode Terang
+                        'brand-green': '#2D767F', 
+                        'brand-gold': '#F5C962', 
+                        'brand-cream': '#FEFBF6',
+                        'brand-teal': '#1A4341', 
+                        'brand-light': '#F7FDFD',
+                        'brand-pink': '#F7A7A6',
+                        // Palet Warna Mode Gelap
+                        'dark-bg': '#121212',
+                        'dark-surface': '#1E1E1E',
+                        'dark-text': '#E0E0E0',
+                        'dark-primary': '#76D7C4',
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 1s ease-out forwards',
+                        'pulse-slow': 'pulse 2.5s infinite',
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(30px) scale(0.98)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Impor Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mada:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Mengatur smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Pola latar belakang SVG yang lebih halus */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .light-mode-bg {
+            background-color: #F7FDFD;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%232D767F' fill-opacity='0.04'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .dark .dark-mode-bg {
+            background-color: #121212;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2376D7C4' fill-opacity='0.05'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Animasi untuk elemen saat di-scroll */
+        .reveal {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: none !important;
+        }
+        .reveal-up { transform: translateY(40px); }
+        .reveal-left { transform: translateX(-40px); }
+        .reveal-right { transform: translateX(40px); }
+
+        /* Efek hover yang lebih menarik untuk card */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(118, 215, 196, 0.1), 0 4px 6px -4px rgba(118, 215, 196, 0.1);
+        }
+        /* Style untuk video background */
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        /* Efek gradien untuk overlay video */
+        .video-overlay {
+            background: linear-gradient(to top, rgba(26, 67, 65, 0.8) 0%, rgba(26, 67, 65, 0.4) 70%, rgba(26, 67, 65, 0.2) 100%);
+        }
+        .dark .video-overlay {
+            background: linear-gradient(to top, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0.4) 70%, rgba(18, 18, 18, 0.2) 100%);
+        }
+        /* Style untuk Tombol Dark Mode */
+        #theme-toggle {
+            background-color: #eee;
+            border-radius: 9999px;
+            padding: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .dark #theme-toggle {
+            background-color: #444;
+        }
+        #theme-toggle-icon {
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+        /* Style untuk dropdown */
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        /* Style untuk navigasi aktif */
+        .active-nav {
+            color: #2D767F !important; /* brand-green */
+            font-weight: 700;
+            position: relative;
+        }
+        .dark .active-nav {
+            color: #76D7C4 !important; /* dark-primary */
+        }
+        .active-nav::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #F5C962; /* brand-gold */
+            border-radius: 50%;
+        }
+        .dark .active-nav::after {
+            background-color: #76D7C4; /* dark-primary */
+        }
+    </style>
+</head>
+<body class="light-mode-bg dark:dark-mode-bg font-sans text-brand-teal dark:text-dark-text">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="bg-white/80 dark:bg-dark-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-3xl font-display text-brand-green dark:text-dark-primary flex items-center">
+                    <i class="fas fa-moon text-brand-gold dark:text-yellow-400 mr-3"></i>
+                    TK Baitul Uyun
+                </a>
+                <div class="hidden md:flex space-x-6 items-center font-semibold" id="desktop-nav">
+                    <div class="relative dropdown-container pt-4 pb-4 -mt-4 -mb-4">
+                        <button class="dropdown-button flex items-center text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">
+                            Tentang
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden mt-2 w-48 bg-white dark:bg-dark-surface rounded-lg shadow-xl py-2 z-20 opacity-0 transform -translate-y-2">
+                            <a href="halaman-profil.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                            <a href="halaman-sambutan.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                            <a href="visi-misi.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                            <a href="halaman-fasilitas.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                            <a href="halaman-guru.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                        </div>
+                    </div>
+
+                    <a href="halaman-program.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Program</a>
+                    <a href="halaman-prestasi.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Prestasi</a>
+                    <a href="halaman-blog.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Blog</a>
+                    <a href="halaman-pendaftaran.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Pendaftaran</a>
+                    <a href="halaman-galeri.html" class="text-gray-600 dark:text-gray-300 hover:text-brand-green dark:hover:text-white transition-colors duration-300">Galeri</a>
+                    <a href="#kontak" class="bg-brand-gold text-brand-teal px-5 py-2 rounded-full hover:bg-yellow-400 dark:bg-dark-primary dark:text-dark-bg dark:hover:bg-teal-300 transition-all duration-300 shadow-sm hover:shadow-lg transform hover:-translate-y-0.5">Hubungi Kami</a>
+                    <button id="theme-toggle" class="w-14 h-8 flex items-center">
+                        <span id="theme-toggle-icon" class="bg-white dark:bg-gray-700 text-yellow-500 dark:text-yellow-300 w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+                            <i class="fas fa-sun"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                     <button id="theme-toggle-mobile" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-sun text-2xl"></i>
+                    </button>
+                    <button id="menu-btn" class="text-brand-green dark:text-dark-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 bg-white dark:bg-dark-surface rounded-lg shadow-xl">
+                <div>
+                    <button class="mobile-dropdown-toggle w-full flex justify-between items-center py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">
+                        <span>Tentang</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="mobile-submenu hidden pl-4 bg-gray-50 dark:bg-gray-800">
+                        <a href="halaman-profil.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Profil</a>
+                        <a href="halaman-sambutan.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Sambutan</a>
+                        <a href="visi-misi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Visi & Misi</a>
+                        <a href="halaman-fasilitas.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Fasilitas</a>
+                        <a href="halaman-guru.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Guru</a>
+                    </div>
+                </div>
+
+                <a href="halaman-program.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Program</a>
+                <a href="halaman-prestasi.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Prestasi</a>
+                <a href="halaman-blog.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Blog</a>
+                <a href="halaman-pendaftaran.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Pendaftaran</a>
+                <a href="halaman-galeri.html" class="mobile-link block py-3 px-4 text-sm text-gray-700 dark:text-gray-200 hover:bg-brand-light dark:hover:bg-gray-700">Galeri</a>
+                <a href="#kontak" class="mobile-link block py-3 px-4 text-sm bg-brand-gold text-brand-teal dark:bg-dark-primary dark:text-dark-bg rounded-b-lg mt-2 text-center font-semibold">Hubungi Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="beranda" class="relative h-[70vh] md:h-screen flex items-center justify-center text-white overflow-hidden">
+            <video id="hero-video" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/2D767F/FEFBF6?text=Video+Prestasi">
+                <source src="video/video_prestasi.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <div class="absolute top-0 left-0 w-full h-full video-overlay z-10"></div>
+            <div class="relative z-20 container mx-auto px-6 text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-display leading-tight reveal reveal-up">
+                    Membentuk Generasi Qur'ani <br class="hidden md:block"> yang <span class="text-brand-gold dark:text-yellow-300">Cerdas</span> & <span class="text-yellow-200 dark:text-teal-200">Berakhlak</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto reveal reveal-up" style="transition-delay: 200ms;">
+                    Menyemai cinta pada Al-Qur'an dan ilmu pengetahuan dalam lingkungan belajar yang aman, islami, dan penuh kegembiraan.
+                </p>
+                <div class="mt-10 reveal reveal-up" style="transition-delay: 400ms;">
+                    <a href="#program" class="bg-brand-gold text-brand-teal dark:bg-dark-primary dark:text-dark-bg font-bold py-4 px-10 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        Jelajahi Program Kami <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profil Sekolah Section (Hanya Sambutan) -->
+        <section id="profil" class="py-24 bg-brand-cream dark:bg-dark-surface">
+            <div class="container mx-auto px-6">
+                <div id="sambutan" class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="reveal reveal-left">
+                        <img src="https://placehold.co/500x600/F7A7A6/1A4341?text=Kepala+Sekolah" alt="Kepala Sekolah" class="rounded-2xl shadow-lg w-full object-cover">
+                    </div>
+                    <div class="reveal reveal-right">
+                        <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary mb-6">Sambutan Hangat</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Salam sejahtera untuk kita semua, Segala puji bagi Allah SWT yang telah memberikan kita kesehatan, kekuatan, dan kesempatan untuk terus berkontribusi dalam dunia pendidikan anak usia dini. Shalawat dan salam semoga senantiasa tercurah kepada Nabi Muhammad SAW, teladan sepanjang masa.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">TK Baitul Uyun hadir dengan semangat membentuk generasi yang cerdas, berakhlak mulia, dan memiliki rasa ingin tahu yang tinggi sejak dini. Kami meyakini bahwa masa kanak-kanak adalah masa emas yang sangat menentukan pembentukan karakter dan dasar-dasar kecerdasan anak di masa depan. Oleh karena itu, kami senantiasa berusaha memberikan lingkungan belajar yang aman, menyenangkan, dan penuh kasih sayang.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Kami juga menjalin kerja sama erat dengan orang tua sebagai mitra utama dalam pendidikan. Dengan komunikasi yang terbuka dan dukungan yang saling menguatkan, kami yakin akan tercipta sinergi yang positif demi perkembangan terbaik untuk anak-anak kita tercinta.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Mari bersama-sama kita tanamkan nilai-nilai kebaikan, kemandirian, dan kecintaan terhadap ilmu sejak usia dini. Semoga langkah kecil yang kita tempuh hari ini akan menjadi pijakan kuat bagi masa depan anak-anak yang lebih cerah dan membanggakan.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Terima kasih atas kepercayaan dan dukungan yang telah diberikan kepada TK Baitul Uyun. Wassalamu’alaikum Warahmatullahi Wabarakatuh.</p>
+                        <p class="font-bold mt-6 text-brand-teal dark:text-white">Ibu Hj. Haulah Sanjaya, S.Pd.I</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Kepala Sekolah TK Baitul Uyun</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Section -->
+        <section id="program" class="py-24 bg-brand-light dark:bg-dark-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary reveal reveal-up">Program Unggulan</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg reveal reveal-up" style="transition-delay: 150ms;">Bermain, Belajar, dan Tumbuh dalam Naungan Islam.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="halaman-program.html" class="block bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up">
+                        <img src="https://placehold.co/600x400/2D767F/FEFBF6?text=Tahfidz+%26+Iqra" alt="Tahfidz & Iqra" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Tahfidz & Iqra Ceria</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Mengenal huruf hijaiyah dan menghafal surat pendek dengan metode yang menyenangkan dan mudah diikuti.</p>
+                        </div>
+                    </a>
+                    <a href="halaman-program.html" class="block bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/F5C962/1A4341?text=Akhlak+%26+Adab" alt="Akhlak & Adab" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Akhlak & Adab Islami</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Pembiasaan doa harian, adab makan, hormat pada orang tua, dan menyayangi teman dalam praktek sehari-hari.</p>
+                        </div>
+                    </a>
+                    <a href="halaman-program.html" class="block bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 400ms;">
+                        <img src="https://placehold.co/600x400/F7A7A6/1A4341?text=Sains+%26+Alam" alt="Sains & Alam" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Sains & Ciptaan Allah</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Mengenal kebesaran Allah melalui eksplorasi alam, hewan, dan tumbuhan di sekitar kita.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="mt-12 text-center reveal reveal-up">
+                    <a href="halaman-program.html" class="bg-brand-green text-white dark:bg-dark-primary dark:text-dark-bg font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 inline-block">
+                        Lihat Semua Program
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prestasi Section -->
+        <section id="prestasi" class="py-24 bg-brand-cream dark:bg-dark-surface">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary reveal reveal-up">Prestasi Membanggakan</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg reveal reveal-up" style="transition-delay: 150ms;">Kilau bakat dan kreativitas anak-anak soleh dan solehah kami.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up">
+                        <img src="gambar/gambar (11).jpeg" alt="Juara 1 Hafalan Surat" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold font-display text-brand-green dark:text-dark-primary mb-1">Juara 1 Hafalan Surat</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Porseni Tingkat Kecamatan</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 200ms;">
+                        <img src="gambar/gambar (2).jpeg" alt="Lomba Adzan Terbaik" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold font-display text-brand-green dark:text-dark-primary mb-1">Lomba Adzan Terbaik</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Gebyar Anak Muslim</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 400ms;">
+                        <img src="gambar/gambar (3).jpeg" alt="Juara 2 Kaligrafi" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold font-display text-brand-green dark:text-dark-primary mb-1">Juara 2 Kaligrafi</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Festival Muharram Ceria</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 600ms;">
+                        <img src="gambar/gambar (4).jpeg" alt="Siswa Berakhlak Terbaik" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold font-display text-brand-green dark:text-dark-primary mb-1">Siswa Berakhlak Terbaik</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Penghargaan Akhir Tahun</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 text-center reveal reveal-up">
+                    <a href="halaman-prestasi.html" class="bg-brand-green text-white dark:bg-dark-primary dark:text-dark-bg font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 inline-block">
+                        Lihat Semua Prestasi
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog Section -->
+        <section id="blog" class="py-24 bg-brand-light dark:bg-dark-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary reveal reveal-up">kegiatan</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg reveal reveal-up" style="transition-delay: 150ms;">Kegiatan anak-anak.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up">
+                        <img src="https://placehold.co/600x400/2D767F/FEFBF6?text=Parenting" alt="Parenting" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-brand-gold text-brand-teal text-xs font-bold px-3 py-1 rounded-full">Parenting</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">2 Agustus 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">5 Cara Mengajarkan Sabar pada Anak</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Mengajarkan kesabaran adalah bagian penting dari pendidikan karakter anak...</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/F5C962/1A4341?text=Pendidikan" alt="Pendidikan" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-brand-pink text-white text-xs font-bold px-3 py-1 rounded-full">Pendidikan</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">28 Juli 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Pentingnya Bermain Sambil Belajar</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Dunia anak adalah dunia bermain. Ketahui manfaat besar di balik aktivitas bermain...</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg group card-hover reveal reveal-up" style="transition-delay: 400ms;">
+                        <img src="https://placehold.co/600x400/1A4341/FEFBF6?text=Kesehatan" alt="Kesehatan" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="p-8">
+                             <div class="flex justify-between items-center mb-4">
+                                <span class="bg-dark-primary text-dark-bg text-xs font-bold px-3 py-1 rounded-full">Kesehatan</span>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">25 Juli 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-brand-green dark:text-dark-primary font-display mb-3">Tips Memilih Bekal Sehat untuk Anak</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Asupan gizi yang baik sangat penting untuk mendukung aktivitas belajar anak...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pendaftaran Section -->
+        <section id="pendaftaran" class="py-24 bg-brand-cream dark:bg-dark-surface">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary reveal reveal-up">Siap Bergabung Bersama Kami?</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg reveal reveal-up" style="transition-delay: 150ms;">Pendaftaran untuk tahun ajaran baru telah dibuka. Klik tombol di bawah untuk melihat alur dan persyaratan pendaftaran. Jangan sampai ketinggalan!</p>
+                    <div class="mt-8 reveal reveal-up" style="transition-delay: 300ms;">
+                        <a href="halaman-pendaftaran.html" class="bg-brand-gold text-brand-teal dark:bg-dark-primary dark:text-dark-bg font-bold py-4 px-10 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 inline-block">
+                            <i class="fas fa-file-alt mr-2"></i> Lihat Info Pendaftaran
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeri Section -->
+        <section id="galeri" class="py-24 bg-brand-light dark:bg-dark-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display text-brand-teal dark:text-dark-primary reveal reveal-up">Galeri Ceria</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg reveal reveal-up" style="transition-delay: 150ms;">Setiap momen adalah pembelajaran dan kenangan indah.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="reveal reveal-up"><img src="gambar/gambar (11).jpeg" class="rounded-lg shadow-md w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 cursor-pointer"></div>
+                    <div class="reveal reveal-up" style="transition-delay: 100ms;"><img src="gambar/gambar (8).jpeg" class="rounded-lg shadow-md w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 cursor-pointer"></div>
+                    <div class="reveal reveal-up" style="transition-delay: 200ms;"><img src="gambar/gambar (9).jpeg" class="rounded-lg shadow-md w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 cursor-pointer"></div>
+                    <div class="reveal reveal-up" style="transition-delay: 300ms;"><img src="gambar/gambar (5).jpeg" class="rounded-lg shadow-md w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 cursor-pointer"></div>
+                </div>
+                 <div class="mt-12 text-center reveal reveal-up">
+                    <a href="halaman-galeri.html" class="bg-brand-green text-white dark:bg-dark-primary dark:text-dark-bg font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 inline-block">
+                        Lihat Semua Galeri
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-brand-teal text-white pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="reveal reveal-left">
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">TK Baitul Uyun</h3>
+                    <p class="text-gray-300">Membentuk generasi penerus yang cerdas, kreatif, dan berakhlak mulia sejak usia dini.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white transition text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="reveal reveal-up" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Hubungi Kami</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt w-5 mt-1 text-brand-gold dark:text-dark-primary"></i><span>Jl. Kapuk Budi Karya No.70, RT.18/RW.12, Kapuk, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11720</span></li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt w-5 text-brand-gold dark:text-dark-primary"></i><span>082110921234</span></li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-5 text-brand-gold dark:text-dark-primary"></i><span>info@TKBaitulUyun.sch.id</span></li>
+                    </ul>
+                </div>
+                <div class="reveal reveal-right" style="transition-delay: 400ms;">
+                    <h3 class="text-2xl font-display font-bold mb-4 text-brand-gold dark:text-dark-primary">Lokasi Sekolah</h3>
+                     <div class="rounded-lg overflow-hidden shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2687.8236180946087!2d106.7473721373776!3d-6.136562099544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f7df8efe0da9%3A0xb9a9bc04a2d4a35d!2sTK%20BAITUL%20UYUN!5e0!3m2!1sid!2sid!4v1754151648148!5m2!1sid!2sid" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 TK Baitul Uyun. Dibuat oleh </i> Musadeto.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script untuk Dark/Light Mode
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const mobileIcon = document.querySelector('#theme-toggle-mobile i');
+        const html = document.documentElement;
+
+        const setDark = () => {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-moon"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-moon text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(24px)';
+        };
+
+        const setLight = () => {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if(themeToggleIcon) themeToggleIcon.innerHTML = '<i class="fas fa-sun"></i>';
+            if(mobileIcon) mobileIcon.className = 'fas fa-sun text-2xl';
+            if(themeToggleIcon) themeToggleIcon.style.transform = 'translateX(0px)';
+        };
+
+        const toggleTheme = () => {
+            if (html.classList.contains('dark')) {
+                setLight();
+            } else {
+                setDark();
+            }
+        };
+
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Cek tema saat halaman dimuat
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            setDark();
+        } else {
+            setLight();
+        }
+
+        // Script untuk toggle menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Script untuk dropdown navigasi
+        document.querySelectorAll('.dropdown-container').forEach(container => {
+            const menu = container.querySelector('.dropdown-menu');
+            container.addEventListener('mouseenter', () => {
+                menu.classList.remove('hidden', 'opacity-0', '-translate-y-2');
+            });
+            container.addEventListener('mouseleave', () => {
+                menu.classList.add('hidden', 'opacity-0', '-translate-y-2');
+            });
+        });
+
+        // Script untuk dropdown navigasi mobile
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const submenu = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                submenu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Tutup menu mobile setelah link diklik
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileMenu) mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Script untuk efek navbar saat scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.remove('shadow-sm');
+            } else {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Script untuk animasi elemen saat masuk viewport
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(elem => {
+            revealObserver.observe(elem);
+        });
+
+        // Script untuk menandai navigasi aktif saat scroll
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('#desktop-nav a, #desktop-nav button');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Anggap aktif jika 50% section terlihat
+        };
+
+        const activeNavObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav');
+                        const navlink = link.dataset.navlink;
+                        if (navlink === id) {
+                            link.classList.add('active-nav');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            activeNavObserver.observe(section);
+        });
+    </script>
+
+</body>
+</html>
